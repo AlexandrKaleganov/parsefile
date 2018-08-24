@@ -19,5 +19,6 @@ public class RidandOutFileTest {
         RidandOutFile ridandOutFile = new RidandOutFile();
         Path path = get("file//google.csv");
         ridandOutFile.send(path.toString());
+        Assert.assertThat("dsa", is("sadasd"));
     }
 }

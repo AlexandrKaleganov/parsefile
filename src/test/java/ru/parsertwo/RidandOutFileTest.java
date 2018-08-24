@@ -1,11 +1,12 @@
 package ru.parsertwo;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.file.Path;
 
 import static java.nio.file.Paths.get;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.is;
 
 /**
  * полное тестирование чтение и вывод файла, настоящий программист стирает 200 строк каждый день

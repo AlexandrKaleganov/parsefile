@@ -19,6 +19,5 @@ public class RidandOutFileTest {
         RidandOutFile ridandOutFile = new RidandOutFile();
         Path path = get("file//google.csv");
         ridandOutFile.send(path.toString());
-
     }
 }

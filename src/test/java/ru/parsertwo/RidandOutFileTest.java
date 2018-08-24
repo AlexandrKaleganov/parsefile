@@ -9,7 +9,7 @@ import static java.nio.file.Paths.get;
 import static org.hamcrest.Matchers.is;
 
 /**
- * полное тестирование чтение и вывод файла, настоящий программист стирает 200 строк каждый день
+ * полное тестирование чтение и вывод файла
  */
 public class RidandOutFileTest {
 

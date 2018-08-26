@@ -6,7 +6,7 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 
-public class RidandOutFile {
+public class RidFile {
     private final BlockingDeque<String[]> data = new LinkedBlockingDeque<>();
     private BufferedReader bufer;
 

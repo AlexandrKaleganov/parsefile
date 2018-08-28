@@ -2,4 +2,4 @@
 [![codecov](https://codecov.io/gh/AlexandrKaleganov/parsefile/branch/master/graph/badge.svg)](https://codecov.io/gh/AlexandrKaleganov/parsefile)
 #parsefile
 
-Сделал двухпоточный парсер один поток читает csv файл построчно, а  второй выводит его также по строчно в консоль. Руки не дошли сделать JavaFX инерфейс.
+Сделал двухпоточный парсер один поток читает csv файл построчно, а  второй выводит его также по строчно в консоль. Руки не дошли сделать JavaFX интерфейс.

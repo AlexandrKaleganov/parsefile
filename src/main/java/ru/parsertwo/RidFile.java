@@ -11,7 +11,6 @@ public class RidFile {
     private BufferedReader bufer;
 
     public void send(String way) {
-        System.out.println("вася");
         Thread out = new Thread(() -> {
             while (!Thread.interrupted()) {
                 try {

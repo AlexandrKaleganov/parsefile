@@ -6,7 +6,7 @@
 
     <groupId>ru.parsertwo</groupId>
     <artifactId>parsefile</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>2.0</version>
     <name>parsefile</name>
     <properties>
@@ -14,16 +14,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <modules>
-    </modules>
 
     <dependencies>
-
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-core</artifactId>
-            <version>3.0</version>
-        </dependency>
 
         <dependency>
             <groupId>org.hamcrest</groupId>

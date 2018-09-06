@@ -30,9 +30,8 @@ public class Startwin extends Application {
         borderPaneTop.setRight(startPars);
         borderPane.setTop(borderPaneTop);
         borderPane.setCenter(tableView);
-        Scene scene = new Scene(borderPane, 600, 400);
         primaryStage.setTitle("Parser");
-        primaryStage.setScene(scene);
+        primaryStage.setScene( new Scene(borderPane, 600, 400));
         primaryStage.show();
     }
 

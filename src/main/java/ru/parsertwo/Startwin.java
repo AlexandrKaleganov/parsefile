@@ -2,19 +2,17 @@ package ru.parsertwo;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 
 public class Startwin extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-
         Button button = new Button("Обзор");
         Text text = new Text(10, 20, "выберете файл *.csv");
         text.setFont(new Font(40));
@@ -27,10 +25,10 @@ public class Startwin extends Application {
         primaryStage.setTitle("Parser");
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {
         launch(args);
     }
+
 }

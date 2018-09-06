@@ -14,7 +14,7 @@ public class Startwin extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Button button = new Button("Обзор");
-        Text text = new Text(10, 20, "выберете файл *.csv");
+        Text text = new Text(10, 20, "выберете файл ");
         text.setFont(new Font(40));
         BorderPane borderPane = new BorderPane();
         BorderPane borderPane1 = new BorderPane();

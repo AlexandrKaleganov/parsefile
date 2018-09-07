@@ -23,21 +23,23 @@ public class RidFile {
     public void send(String way) {
         Thread out = new Thread(() -> {
             boolean stroki = false;
-            while (!Thread.interrupted()) {
+            while (!Thread.currentThread().isInterrupted()) {
+
                 try {
                     for (String cell : data.take()
                             ) {
                         if (!stroki) {
                             tableView.getColumns().add(new TableColumn(cell));
                         } else {
-                            System.out.println("[" + cell + "]");                        }
+                            System.out.print("[" + cell + "]");                        }
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    Thread.currentThread().interrupt();
                 }
 
                 System.out.println("  new Stroka");
             }
+            System.out.println("завершился");
         });
 
         Thread read = new Thread(() -> {

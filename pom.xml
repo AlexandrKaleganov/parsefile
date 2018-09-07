@@ -93,6 +93,25 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.fxml</include>
+                    <include>**/*.css</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.css</include>
+                    <include>**/*.png</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.ttf</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
 </project>

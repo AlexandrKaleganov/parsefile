@@ -10,8 +10,8 @@ public class RidFileTest {
 
     @Test
     public void send() {
-        RidFile ridFile = new RidFile();
-        Path path = get("file//google.csv");
-        ridFile.send(path.toString());
+//        RidFile ridFile = new RidFile();
+//        Path path = get("file//google.csv");
+//        ridFile.send(path.toString());
     }
 }

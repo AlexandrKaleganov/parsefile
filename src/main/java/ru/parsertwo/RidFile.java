@@ -1,5 +1,9 @@
 package ru.parsertwo;
 
+
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.BlockingDeque;
@@ -8,20 +12,30 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class RidFile {
     private final BlockingDeque<String[]> data = new LinkedBlockingDeque<>();
+    @SuppressWarnings("SpellCheckingInspection")
     private BufferedReader bufer;
+    private final TableView tableView;
+
+    public RidFile(TableView<String[]> tableView) {
+        this.tableView = tableView;
+    }
 
     public void send(String way) {
         Thread out = new Thread(() -> {
+            boolean stroki = false;
             while (!Thread.interrupted()) {
                 try {
                     for (String cell : data.take()
                             ) {
-                        System.out.print(" [" + cell + "] ");
-
+                        if (!stroki) {
+                            tableView.getColumns().add(new TableColumn(cell));
+                        } else {
+                            System.out.println("[" + cell + "]");                        }
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 System.out.println("  new Stroka");
             }
         });

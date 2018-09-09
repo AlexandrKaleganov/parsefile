@@ -21,14 +21,16 @@ public class RidFile {
     private final BlockingDeque<ArrayList<String>> data = new LinkedBlockingDeque<>();
     private final TableView<ObservableList<String>> tableView;
 
+
     public RidFile(TableView<ObservableList<String>> tableView) {
         this.tableView = tableView;
     }
 
     public void send(String way) {
-        //поток, который выводит данные в таблицу
+        //поток, который выводит данные в таблицу по одной строке
         Thread out = new Thread(() -> {
             boolean stroki = false;     //пока первый массив это заголовок
+            int dataLenght = 0;       //тут сохраним длину первого массива ЗАГОЛОВКА
             while (!Thread.currentThread().isInterrupted() || !this.data.isEmpty()) {
 
                 try {
@@ -36,6 +38,7 @@ public class RidFile {
                     if (!stroki) {
                         for (int i = 0; i < temp.size(); i++) {
                             int finalI = i;
+                            dataLenght = temp.size();
                             TableColumn<ObservableList<String>, String> col = new TableColumn<>(temp.get(finalI));
                             col.setCellValueFactory(
                                     param -> new SimpleStringProperty(param.getValue().get(finalI)));
@@ -43,6 +46,10 @@ public class RidFile {
                         }
 
                     } else {
+                        //тут проверили если наша входящая строка меньше загловка то заполним недостающее пустыми данными
+                        for (int i = temp.size(); i < dataLenght; i++) {
+                            temp.add("");
+                        }
                         ObservableList<String> a = FXCollections.observableArrayList();
                         a.addAll(temp);
                         tableView.getItems().add(a);
@@ -52,9 +59,9 @@ public class RidFile {
                 }
                 stroki = true;   //после того как добавилизаголовок, заполняем строки
             }
-            System.out.println("поток завершён");
         });
-        //поток который читает файл
+
+        //поток который читает файл по одной строке
         Thread read = new Thread(() -> {
             try {
                 BufferedReader bufer = new BufferedReader(new InputStreamReader(new FileInputStream(way)));
@@ -67,7 +74,6 @@ public class RidFile {
             }
             out.interrupt();
         });
-
 
         out.start();
         read.start();

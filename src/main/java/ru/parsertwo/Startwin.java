@@ -43,10 +43,14 @@ public class Startwin extends Application {
         BorderPane borderPaneTop = new BorderPane();
         BorderPane borderPaneTopCentre = new BorderPane();
         TableView<ObservableList<String>> tableView = new TableView();
-        //размещение элементов не знал как по другому их ещё разместить
-        //опыта в javaFX маловато
-        //добавим таблицу в скрол панель
-//        scrollPane.setContent(tableView);
+
+        /**
+         * размещение элементов не знал как по другому их ещё разместить
+         * опыта в javaFX маловато
+         * добавим таблицу в скрол панель
+         */
+
+        //scrollPane.setContent(tableView);
         borderPaneTopCentre.setCenter(text);
         borderPaneTop.setTop(borderPaneTopCentre);
         borderPaneTop.setCenter(way);

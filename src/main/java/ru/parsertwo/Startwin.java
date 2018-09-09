@@ -1,7 +1,7 @@
 package ru.parsertwo;
 
 import javafx.application.Application;
-import javafx.scene.Parent;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableView;
@@ -39,7 +39,7 @@ public class Startwin extends Application {
         BorderPane borderPane = new BorderPane();
         BorderPane borderPaneTop = new BorderPane();
         BorderPane borderPaneTopCentre = new BorderPane();
-        TableView<String[]> tableView = new TableView<String[]>();
+        TableView<ObservableList<String>> tableView = new TableView();
         //размещение элементов не знал как по другому их ещё разместить
         //опыта в javaFX маловато
 //добавим таблицу в скрол панель

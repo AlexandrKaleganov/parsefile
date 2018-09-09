@@ -6,7 +6,7 @@
 
     <groupId>ru.parsertwo</groupId>
     <artifactId>parsefile</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>2.0</version>
     <name>parsefile</name>
     <properties>
@@ -49,6 +49,27 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>Parser</finalName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>ru.parsertwo.Startwin</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
             </plugin>
@@ -68,6 +89,7 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+
                     </execution>
                 </executions>
             </plugin>
@@ -80,11 +102,13 @@
                         <id>validate</id>
                         <phase>validate</phase>
                         <configuration>
+
                             <configLocation>checkstyle.xml</configLocation>
                             <encoding>UTF-8</encoding>
                             <consoleOutput>true</consoleOutput>
                             <failsOnError>true</failsOnError>
                             <includeTestSourceDirectory>true</includeTestSourceDirectory>
+
                         </configuration>
                         <goals>
                             <goal>check</goal>

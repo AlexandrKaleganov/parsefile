@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.collections.ObservableList;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.BlockingDeque;
@@ -71,7 +72,7 @@ public class RidFile {
         //поток который читает файл по одной строке
         Thread read = new Thread(() -> {
             try {
-                BufferedReader bufer = new BufferedReader(new InputStreamReader(new FileInputStream(way)));
+                BufferedReader bufer = new BufferedReader(new InputStreamReader(new FileInputStream(way), StandardCharsets.UTF_8));
                 String line;
                 while (null != (line = bufer.readLine())) {
                     data.offer(new ArrayList<>(Arrays.asList(line.split("\\s*,\\s*"))));

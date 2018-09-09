@@ -1,6 +1,7 @@
 package ru.parsertwo;
 
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
@@ -17,10 +18,10 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class RidFile {
     private final BlockingDeque<List<String>> data = new LinkedBlockingDeque<>();
-    private final TableView tableView;
+    private final TableView<ObservableList<String>> tableView;
 
 
-    public RidFile(TableView tableView) {
+    public RidFile(TableView<ObservableList<String>> tableView) {
         this.tableView = tableView;
     }
 
@@ -39,14 +40,14 @@ public class RidFile {
                             TableColumn<ObservableList<String>, String> col = new TableColumn<>(temp.get(finalI));
                             col.setCellValueFactory(
                                     param -> new SimpleStringProperty(param.getValue().get(finalI)));
-                            tableView.getColumns().add(col);
+                            Platform.runLater(() -> tableView.getColumns().add(col));
                         }
 
                         stroki = true;
                     } else {
                         ObservableList<String> a = FXCollections.observableArrayList();
                         a.addAll(temp);
-                        tableView.getItems().add(a);
+                        Platform.runLater(() -> tableView.getItems().add(a));
                     }
 
                 } catch (Exception e) {
@@ -63,7 +64,6 @@ public class RidFile {
                     data.offer(Arrays.asList(line.split("\\s*,\\s*")));
                 }
             } catch (IOException e) {
-                System.out.println(e);
                 out.interrupt();
             }
             out.interrupt();

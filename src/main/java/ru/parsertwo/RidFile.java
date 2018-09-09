@@ -28,8 +28,7 @@ public class RidFile {
 
     public void send(String way) {
         Thread out = new Thread(() -> {
-            boolean stroki = false;
-            int flSize = 0;
+            boolean stroki = false;     //пока первый массив это заголовок
             while (!Thread.currentThread().isInterrupted()) {
 
                 try {
@@ -38,7 +37,6 @@ public class RidFile {
                         System.out.println("Заголовок " + temp.size());
                         for (int i = 0; i < temp.size(); i++) {
                             int finalI = i;
-                            flSize =  temp.size();
                             TableColumn<ObservableList<String>, String> col = new TableColumn<>(temp.get(finalI));
                             col.setCellValueFactory(
                                     param -> new SimpleStringProperty(param.getValue().get(finalI)));
@@ -47,15 +45,14 @@ public class RidFile {
 
                     } else {
                         System.out.println("Длинна остальных массивов " + temp.size());
-                                ObservableList<String> a = FXCollections.observableArrayList();
-                                a.addAll(temp);
-                                tableView.getItems().add(a);
+                        ObservableList<String> a = FXCollections.observableArrayList();
+                        a.addAll(temp);
+                        tableView.getItems().add(a);
                     }
-
                 } catch (Exception e) {
                     Thread.currentThread().interrupt();
                 }
-                stroki = true;
+                stroki = true;   //после того как добавилизаголовок, заполняем строки
             }
         });
 

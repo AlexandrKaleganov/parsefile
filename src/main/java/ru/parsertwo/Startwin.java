@@ -21,12 +21,15 @@ public class Startwin extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //скрол панель была закоментированная она мне не пригодилась
+        /*
         ScrollPane scrollPane = new ScrollPane();
         // Always show vertical scroll bar
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         // Horizontal scroll bar is only displayed when needed
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        */
         //элемент отвечает за поиск файла
         JFileChooser fileChooser = new JFileChooser();
         //все сотальные элементы
@@ -42,15 +45,15 @@ public class Startwin extends Application {
         TableView<ObservableList<String>> tableView = new TableView();
         //размещение элементов не знал как по другому их ещё разместить
         //опыта в javaFX маловато
-//добавим таблицу в скрол панель
-        scrollPane.setContent(tableView);
+        //добавим таблицу в скрол панель
+//        scrollPane.setContent(tableView);
         borderPaneTopCentre.setCenter(text);
         borderPaneTop.setTop(borderPaneTopCentre);
         borderPaneTop.setCenter(way);
         borderPaneTop.setLeft(buttonWay);
         borderPaneTop.setRight(buttonPars);
         borderPane.setTop(borderPaneTop);
-        borderPane.setCenter(scrollPane);
+        borderPane.setCenter(tableView);
 
         //название формы
         primaryStage.setTitle("Parser");

@@ -21,20 +21,19 @@ public class RidFile {
     private final BlockingDeque<ArrayList<String>> data = new LinkedBlockingDeque<>();
     private final TableView<ObservableList<String>> tableView;
 
-
     public RidFile(TableView<ObservableList<String>> tableView) {
         this.tableView = tableView;
     }
 
     public void send(String way) {
+        //поток, который выводит данные в таблицу
         Thread out = new Thread(() -> {
             boolean stroki = false;     //пока первый массив это заголовок
-            while (!Thread.currentThread().isInterrupted()) {
+            while (!Thread.currentThread().isInterrupted() || !this.data.isEmpty()) {
 
                 try {
                     ArrayList<String> temp = data.take();
                     if (!stroki) {
-                        System.out.println("Заголовок " + temp.size());
                         for (int i = 0; i < temp.size(); i++) {
                             int finalI = i;
                             TableColumn<ObservableList<String>, String> col = new TableColumn<>(temp.get(finalI));
@@ -44,7 +43,6 @@ public class RidFile {
                         }
 
                     } else {
-                        System.out.println("Длинна остальных массивов " + temp.size());
                         ObservableList<String> a = FXCollections.observableArrayList();
                         a.addAll(temp);
                         tableView.getItems().add(a);
@@ -54,8 +52,9 @@ public class RidFile {
                 }
                 stroki = true;   //после того как добавилизаголовок, заполняем строки
             }
+            System.out.println("поток завершён");
         });
-
+        //поток который читает файл
         Thread read = new Thread(() -> {
             try {
                 BufferedReader bufer = new BufferedReader(new InputStreamReader(new FileInputStream(way)));

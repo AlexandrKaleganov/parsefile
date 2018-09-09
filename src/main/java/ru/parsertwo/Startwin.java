@@ -14,9 +14,17 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 
+/**
+ * @author Alexander Kaleganov
+ * @since 09.09.2018
+ * @version parser_1/0
+ * этот класс отвечает за виуальную часть программы
+ * я не силён в javaFX по этому написал топорным способом по простому
+ *
+ */
 
 public class Startwin extends Application {
-    //наь класс который будет читать файл
+    //нашь класс который будет читать файл
     private RidFile ridFile;
 
     @Override

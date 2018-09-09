@@ -9,13 +9,20 @@ import javafx.scene.control.TableView;
 import javafx.collections.ObservableList;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
+/**
+ * @author Alexander Kaleganov
+ * @since 09.09.2018
+ * @version parser_1/0
+ * этот класс сома логика программы в классе содержится один метод, который состоит из двух потоков
+ * первый поток будет пытаться получить из блокирующей очереди строку
+ * второй поток будет читать файл по одной строке, и добавлять прочитонную строчку в блокирующую очередь
+ *
+ */
 
 public class RidFile {
     private final BlockingDeque<ArrayList<String>> data = new LinkedBlockingDeque<>();

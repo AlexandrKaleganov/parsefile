@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.BlockingDeque;
@@ -17,7 +18,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 
 public class RidFile {
-    private final BlockingDeque<List<String>> data = new LinkedBlockingDeque<>();
+    private final BlockingDeque<ArrayList<String>> data = new LinkedBlockingDeque<>();
     private final TableView<ObservableList<String>> tableView;
 
 
@@ -26,42 +27,44 @@ public class RidFile {
     }
 
     public void send(String way) {
-
         Thread out = new Thread(() -> {
             boolean stroki = false;
+            int flSize = 0;
             while (!Thread.currentThread().isInterrupted()) {
 
                 try {
-                    List<String> temp = data.take();
-
+                    ArrayList<String> temp = data.take();
                     if (!stroki) {
+                        System.out.println("Заголовок " + temp.size());
                         for (int i = 0; i < temp.size(); i++) {
                             int finalI = i;
+                            flSize =  temp.size();
                             TableColumn<ObservableList<String>, String> col = new TableColumn<>(temp.get(finalI));
                             col.setCellValueFactory(
                                     param -> new SimpleStringProperty(param.getValue().get(finalI)));
                             Platform.runLater(() -> tableView.getColumns().add(col));
                         }
 
-                        stroki = true;
                     } else {
-                        ObservableList<String> a = FXCollections.observableArrayList();
-                        a.addAll(temp);
-                        Platform.runLater(() -> tableView.getItems().add(a));
+                        System.out.println("Длинна остальных массивов " + temp.size());
+                                ObservableList<String> a = FXCollections.observableArrayList();
+                                a.addAll(temp);
+                                tableView.getItems().add(a);
                     }
 
                 } catch (Exception e) {
                     Thread.currentThread().interrupt();
                 }
+                stroki = true;
             }
         });
 
         Thread read = new Thread(() -> {
             try {
-                BufferedReader bufer = new BufferedReader(new InputStreamReader(new FileInputStream(way), StandardCharsets.UTF_16));
+                BufferedReader bufer = new BufferedReader(new InputStreamReader(new FileInputStream(way)));
                 String line;
                 while (null != (line = bufer.readLine())) {
-                    data.offer(Arrays.asList(line.split("\\s*,\\s*")));
+                    data.offer(new ArrayList<>(Arrays.asList(line.split("\\s*,\\s*"))));
                 }
             } catch (IOException e) {
                 out.interrupt();

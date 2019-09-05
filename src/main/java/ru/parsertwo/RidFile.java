@@ -42,7 +42,7 @@ public class RidFile {
             while (!Thread.currentThread().isInterrupted() || !this.data.isEmpty()) {
 
                 try {
-                    ArrayList<String> temp = data.take();
+                    ArrayList<String> temp = this.data.take();
                     if (!stroki) {
                         for (int i = 0; i < temp.size(); i++) {
                             int finalI = i;
